@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import withSplashScreen from './src/components/withSplashScreen';
 import GetStarted from './screens/GetStarted';
 import Signup from './screens/Signup';
+import Login from './screens/Login';
+import Home from './screens/Home';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,16 @@ const App = () => {
         <Stack.Screen
           name="SignUp"
           component={Signup}
+          options={{ headerShown: false }} // Navigasyon çubuğunu gizle
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }} // Navigasyon çubuğunu gizle
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false }} // Navigasyon çubuğunu gizle
         />
       </Stack.Navigator>

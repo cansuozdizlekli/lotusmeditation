@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Login from './Login';
+import Home from './Home';
 
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleRegister = () => {
-    // Burada kullanıcı kaydı işlemleri yapılabilir
-    // Örneğin, bir API'ye POST isteği gönderilir
+    navigation.navigate('Home');
     Alert.alert('Register', 'Registration Successful!');
+  };
+
+  const handleLoginPress = () => {
+    navigation.navigate('Login');
   };
 
   return (
@@ -59,7 +66,7 @@ const Signup = () => {
       <TouchableOpacity style={styles.buttonRegister} onPress={handleRegister}>
         <Text style={styles.RegisterButtonText}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonLogin} onPress={() => console.log('Login button pressed')}>
+      <TouchableOpacity style={styles.buttonLogin} onPress={handleLoginPress}>
         <Text style={styles.LoginButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
