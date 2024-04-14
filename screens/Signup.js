@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Login from './Login';
-import Home from './Home';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,8 +12,20 @@ const Signup = () => {
   const navigation = useNavigation();
 
   const handleRegister = () => {
-    navigation.navigate('Home');
-    Alert.alert('Register', 'Registration Successful!');
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        navigation.navigate('Home');
+        Alert.alert('Register', `Welcome!! ${user.email}`);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
   };
 
   const handleLoginPress = () => {

@@ -7,6 +7,7 @@ import GetStarted from './screens/GetStarted';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Home from './screens/Home';
+import './utils/firebaseHelper'
 
 const Stack = createStackNavigator();
 
