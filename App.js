@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import withSplashScreen from './src/components/withSplashScreen';
+import GetStarted from './screens/GetStarted';
+import Signup from './screens/Signup';
 
+const Stack = createStackNavigator();
 
-const Stack = createNativeStackNavigator();
-
-
-function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Hello world!!!!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="GetStarted"
+          component={GetStarted}
+          options={{ headerShown: false }} // Navigasyon çubuğunu gizle
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={Signup}
+          options={{ headerShown: false }} // Navigasyon çubuğunu gizle
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
