@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Home from './Home';
 
 const Login = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
@@ -14,8 +13,14 @@ const Login = () => {
     navigation.goBack()
   };
 
-  const handleLoginPress = () => {
-    navigation.navigate('Home');
+  const handleLoginPress = async () => {
+    const auth = getAuth();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert('Login Error', error.message);
+    }
   };
 
   return (

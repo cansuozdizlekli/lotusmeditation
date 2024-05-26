@@ -11,20 +11,29 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        navigation.navigate('Home');
-        Alert.alert('Register', `Welcome!! ${user.email}`);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      navigation.navigate('Home');
+      Alert.alert('Register', `Welcome!! ${user.email}`);
+    } catch (error) {
+      Alert.alert('Registration Error', error.message);
+    }
+
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed up 
+    //     const user = userCredential.user;
+    //     navigation.navigate('Home');
+    //     Alert.alert('Register', `Welcome!! ${user.email}`);
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // ..
+    //   });
 
   };
 
