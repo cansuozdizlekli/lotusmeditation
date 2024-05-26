@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Signup from './Signup';
+import Home from './Home';
 
 const GetStarted = () => {
   const navigation = useNavigation();
@@ -33,7 +34,7 @@ const GetStarted = () => {
             marginTop: 40,
           }}
           onPress={() => {
-            navigation.navigate('SignUp');
+            navigation.navigate('Home');
           }}
         >
           <Text style={{ color: 'white', fontSize: 17 }}>Get Started</Text>
