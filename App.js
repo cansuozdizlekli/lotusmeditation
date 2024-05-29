@@ -45,6 +45,7 @@ const App = () => {
           name="Yoga"
           component={Yoga}
           options={({ navigation }) => ({
+            headerTitle: "Yoga Exercise",
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="arrow-back" size={24} color="black" />

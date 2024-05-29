@@ -34,7 +34,7 @@ const GetStarted = () => {
             marginTop: 40,
           }}
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.navigate('SignUp');
           }}
         >
           <Text style={{ color: 'white', fontSize: 17 }}>Get Started</Text>

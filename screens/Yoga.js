@@ -11,9 +11,12 @@ const YogaScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Yoga Screen</Text>
-      <Text style={styles.description}>Welcome to the Yoga Screen! This is where you can find information about yoga practices.</Text>
-
+      <Text style={styles.description}>Yoga exercises combine controlled movements, breathing techniques, and mindfulness to improve flexibility, strength, and mental well-being. </Text>
+      <Image
+        source={require('/Users/cansuozdizlekli/AwesomeProject/assets/yoga-image.png')}
+        style={{ width: '100%', height: '85%' }}
+        resizeMode="contain"
+      />
     </View>
   );
 };
@@ -25,21 +28,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
   description: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
     marginHorizontal: 20,
-    marginBottom: 20,
   },
   image: {
     width: 200,
-    height: 200,
-    marginBottom: 20,
+    height: 200
   },
 });
 

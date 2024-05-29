@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MeditationScreen = () => {
@@ -10,30 +10,39 @@ const MeditationScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Meditation Screen</Text>
-      <Text style={styles.description}>Welcome to the Meditation Screen! This is where you can find information about meditation techniques and practices.</Text>
-    </View>
+    <ImageBackground
+      source={require('/Users/cansuozdizlekli/AwesomeProject/assets/playerbackground.png')}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Breath</Text>
+        <Text style={styles.description}>Breathe deeply and let the rhythm of your breath guide you into a state of calm and centeredness.</Text>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: 'top',
+    alignItems: 'leading',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
+    marginLeft: 20
   },
   description: {
     fontSize: 16,
-    textAlign: 'center',
     marginHorizontal: 20,
     marginBottom: 20,
+    marginRight: 90
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
 });
 
