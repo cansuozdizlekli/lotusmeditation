@@ -9,8 +9,18 @@ const firebaseConfig = {
   messagingSenderId: "743580589249",
   appId: "1:743580589249:web:d7b073240c879157240840"
 };
+let app;
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+try {
+  if (!app) {
+    app = initializeApp(firebaseConfig)
+    getAuth(app);
+  }
+  console.log("firebase initialized")
 
-export { app, auth };
+} catch (e) {
+  console.log(e)
+}
+
+export default app;
+
