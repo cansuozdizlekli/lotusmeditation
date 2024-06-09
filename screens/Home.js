@@ -37,10 +37,10 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.cardsContainer}>
-        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/sleep.png')} title="Sleep" />
-        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/healing.png')} title="Healing" />
-        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/calm.png')} title="Calm" />
-        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/relax.png')} title="Relax" />
+        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/sleep.png')} title="Sleep" navigateToDetailPage={navigateToDetailPage} />
+        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/healing.png')} title="Healing" navigateToDetailPage={navigateToDetailPage} />
+        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/calm.png')} title="Calm" navigateToDetailPage={navigateToDetailPage} />
+        <Card image={require('/Users/cansuozdizlekli/AwesomeProject/assets/relax.png')} title="Relax" navigateToDetailPage={navigateToDetailPage} />
       </View>
 
       <View style={styles.categoriesContainer}>
@@ -58,14 +58,21 @@ const HomeScreen = () => {
   );
 };
 
-const Card = ({ image, title }) => {
+const Card = ({ image, title, navigateToDetailPage }) => {
+  const handlePress = () => {
+    navigateToDetailPage(title)
+  };
+
   return (
-    <View style={styles.card}>
-      <View style={styles.cardImageContainer}>
-        <Image source={image} style={styles.cardImage} />
+    <TouchableOpacity style={styles.card} onPress={handlePress}>
+      <View >
+        <View style={styles.cardImageContainer}>
+          <Image source={image} style={styles.cardImage} />
+        </View>
+        <Text style={styles.cardTitle}>{title}</Text>
       </View>
-      <Text style={styles.cardTitle}>{title}</Text>
-    </View>
+    </TouchableOpacity>
+
   );
 };
 
@@ -164,7 +171,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 13,
     marginTop: 5,
-    fontWeight: "400"
+    fontWeight: "400",
+    marginLeft: 13,
   },
 
   categoriesContainer: {

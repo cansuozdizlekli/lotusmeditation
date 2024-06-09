@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 
@@ -8,6 +8,8 @@ const BreathScreen = () => {
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [soundPosition, setSoundPosition] = useState(0);
+  const [soundDuration, setSoundDuration] = useState(0);
+  const [soundRemaining, setSoundRemaining] = useState(0);
 
   useEffect(() => {
     return sound
@@ -42,6 +44,8 @@ const BreathScreen = () => {
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setSoundPosition(status.positionMillis / status.durationMillis);
+      setSoundDuration(status.durationMillis);
+      setSoundRemaining(status.durationMillis - status.positionMillis);
     }
   };
 
@@ -58,6 +62,12 @@ const BreathScreen = () => {
     loadSound();
   }, []);
 
+  const formatTime = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = Math.floor((millis % 60000) / 1000);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   return (
     <ImageBackground
       source={require('/Users/cansuozdizlekli/AwesomeProject/assets/playerbackground.png')}
@@ -71,16 +81,27 @@ const BreathScreen = () => {
           </Text>
         </View>
 
-        <View style={styles.progressBar}>
-          <TouchableOpacity style={[styles.progressButton, { left: `${soundPosition * 80}%` }]} >
-            <View style={styles.buttonCircle} />
-          </TouchableOpacity>
-          <View style={[styles.progress, { width: `${soundPosition * 80}%` }]} />
+        <View style={styles.progressBarContainer}>
 
+          <View style={styles.progressBar}>
+            <View style={[styles.progress, { width: `${soundPosition * 100}%` }]} />
+            <TouchableOpacity style={[styles.progressButton, { left: `${soundPosition * 100}%` }]}>
+              <View style={styles.buttonCircle} />
+            </TouchableOpacity>
+          </View>
         </View>
-        <TouchableOpacity style={styles.button} onPress={toggleSound}>
-          <Text style={styles.buttonText}>{isPlaying ? 'Stop Sound' : 'Play Sound'}</Text>
-        </TouchableOpacity>
+
+
+        <View style={styles.soundContainer}>
+          <Text style={styles.timeText}>{formatTime(soundPosition * soundDuration)}</Text>
+          <TouchableOpacity style={styles.button} onPress={toggleSound}>
+            <Image
+              source={isPlaying ? require('/Users/cansuozdizlekli/AwesomeProject/assets/play.png') : require('/Users/cansuozdizlekli/AwesomeProject/assets/pause.png')}
+              style={styles.buttonIcon}
+            />
+          </TouchableOpacity>
+          <Text style={styles.timeText}>{formatTime(soundRemaining)}</Text>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -89,11 +110,11 @@ const BreathScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: '',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  textcontainer: {
-    justifyContent: 'top',
+  textContainer: {
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   title: {
@@ -107,13 +128,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 90,
   },
+  progressBarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    position: 'absolute',
+    bottom: 100,
+    paddingHorizontal: 20,
+    paddingBottom: 30
+  },
   progressBar: {
-    width: '80%',
-    height: 10,
-    backgroundColor: '#ccc',
+    flex: 1,
+    height: 5,
+    backgroundColor: '#000',
     borderRadius: 5,
-    marginBottom: 20,
-    marginTop: 200,
     position: 'relative',
   },
   progress: {
@@ -126,9 +154,9 @@ const styles = StyleSheet.create({
   },
   progressButton: {
     position: 'absolute',
-    top: -10,
     width: 20,
     height: 20,
+    paddingBottom: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -136,23 +164,35 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    marginTop: 5,
-    backgroundColor: '#007bff',
+    backgroundColor: '#ffffff',
+    borderColor: '#000000',
+    borderWidth: 1,
+  },
+  timeText: {
+    color: '#000000',
+    fontSize: 14,
+    paddingHorizontal: 110
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
   },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 5,
-    width: 50
+  soundContainer: {
+    position: 'absolute',
+    bottom: 50,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
+  button: {
+    backgroundColor: '#000',
+    padding: 15,
+    borderRadius: 50,
+  },
+  buttonIcon: {
+    width: 30,
+    height: 30,
   },
 });
 

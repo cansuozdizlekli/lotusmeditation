@@ -11,6 +11,10 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 import Yoga from './screens/Yoga';
 import Blog from './screens/Blog';
+import Sleep from './screens/Sleep';
+import Healing from './screens/Healing';
+import Calm from './screens/Calm';
+import Relax from './screens/Relax';
 import Meditation from './screens/Meditation';
 import Breath from './screens/Breath';
 import './utils/firebaseHelper'
@@ -25,6 +29,50 @@ const App = () => {
           name="GetStarted"
           component={GetStarted}
           options={{ headerShown: false }} // Navigasyon çubuğunu gizle
+        />
+        <Stack.Screen
+          name="Sleep"
+          component={Sleep}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Healing"
+          component={Healing}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Relax"
+          component={Relax}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Calm"
+          component={Calm}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
         />
         <Stack.Screen
           name="SignUp"
@@ -86,7 +134,6 @@ const App = () => {
             ),
           })}
         />
-
 
       </Stack.Navigator>
     </NavigationContainer>
